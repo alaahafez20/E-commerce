@@ -1,0 +1,18 @@
+img{
+    height: 250px;
+}
+.sticky-top{
+    top: 80px;
+}
+.card-title{
+    font-size: 1rem;
+}
+.card-text{
+    color: rgb(55, 45, 146);
+}
+.card{
+    border: 1px solid rgb(216, 212, 212);
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    overflow: hidden;
+}

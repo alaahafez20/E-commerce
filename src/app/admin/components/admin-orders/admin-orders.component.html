@@ -1,0 +1,18 @@
+<h1>Orders</h1>
+
+<table class="table my-3">
+    <thead>
+        <tr>
+            <th scope="col">Customer</th>
+            <th scope="col">Date</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders; let i = index">
+            <td>{{users[i]}}</td>
+            <td>{{order.payload.val().date}}</td>
+            <td><a class='btn btn-link' [routerLink]="['/shop/order-details', order.key]">view</a></td>
+        </tr>
+    </tbody>
+</table>

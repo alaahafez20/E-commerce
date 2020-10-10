@@ -1,0 +1,26 @@
+<div class="row">
+        <div class="col-md-2">
+            <div class="list-group sticky-top mb-5">
+                <a routerLink='/' [class.active]='!category' class="list-group-item list-group-item-action">All Categories</a>
+                <a *ngFor='let categ of categories' class="list-group-item list-group-item-action"
+                   routerLink='/'
+                   [class.active]='category == categ.key'
+                   [queryParams]='{category: categ.key}'>
+                   {{categ.payload.val().name}}
+                </a>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-4" *ngFor='let product of products | filterByCategory:category'>
+                    <div class="card mb-5">
+                        <img [src]="product.payload.val().imageUrl" class="card-img-top w-100">
+                        <div class="card-body bg-light">
+                            <h5 class="card-title">{{product.payload.val().title}}</h5>
+                            <p class="card-text">{{product.payload.val().price | currency:'USD'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

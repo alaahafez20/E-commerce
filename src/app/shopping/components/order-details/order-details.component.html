@@ -1,0 +1,22 @@
+
+<div class="col-md-6">
+        <div class="card" *ngIf='Carts && Carts.length'>
+            <div class="card-body">
+                <h2 class="card-title">Order Details</h2>
+                <ul class="list-group list-group-flush">
+                    <li *ngFor='let cart of Carts' class="list-group-item">
+                        {{cart.quantity}} x {{cart.title}}
+                        <div class="float-right">
+                            {{cart.price * cart.quantity | currency:'USD'}}
+                        </div>
+                    </li>
+                    <li class="list-group-item font-weight-bold">
+                        Total
+                        <div class="float-right">
+                            {{totalCost}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

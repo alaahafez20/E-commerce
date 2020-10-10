@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-6">
+        <form [formGroup]='myForm' (ngSubmit)='save(myForm)' class="mb-5">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="title">Title</label>
+                    <input type="text" formControlName='title' class="form-control" id="title"
+                     #title [class.is-invalid]='myForm.get("title").invalid && myForm.get("title").touched'>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="price">Price</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" formControlName='price' class="form-control" id="price"
+                          #price [class.is-invalid]='myForm.get("price").invalid && myForm.get("price").touched'>
+                        <div class="invalid-feedback" *ngIf='myForm.get("price").errors?.min'>
+                            price should be 0 or higher
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputState">Category</label>
+                    <select id="inputState" formControlName='category' class="form-control"
+                        [class.is-invalid]='myForm.get("category").invalid && myForm.get("category").touched'>
+                        <option></option>
+                        <option *ngFor='let category of categoriesList' [value]='category.key'>{{category.payload.val().name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="image">Image URL</label>
+                    <input type="text" formControlName='imageUrl' url class="form-control" id="image"
+                      #imageUrl [class.is-invalid]='myForm.get("imageUrl").invalid && myForm.get("imageUrl").touched'>
+                    <div *ngIf='myForm.get("imageUrl").errors?.url'>Enter valid URL please</div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger ml-1" (click)='delete()'>Delete</button>
+
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf='title.value' class="card">
+            <img [src]="imageUrl.value" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{title.value}}</h5>
+                <p class="card-text">{{price.value | currency:'USD'}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-2">
+        <div class="list-group sticky-top mb-5">
+            <a routerLink='/shop/products' [class.active]='!category' class="list-group-item list-group-item-action active">All Categories</a>
+            <a *ngFor='let categ of categories' class="list-group-item list-group-item-action"
+               routerLink='/shop/products'
+               [queryParams]='{category: categ.key}'
+               [class.active]='category == categ.key'>
+               {{categ.payload.val().name}}
+            </a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4" *ngFor='let product of products | filterByCategory:category'>
+                <div class="card mb-5">
+                    <img [src]="product.payload.val().imageUrl" class="card-img-top w-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.payload.val().title}}</h5>
+                        <p class="card-text">{{product.payload.val().price | currency:'USD'}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary w-100 rounded-0" (click)='showBuy(product.key)'>Add to Cart</button>
+                        <div *ngIf='product.key == check'>
+                            <input type="number" #myInput class="form-control w-75 float-left rounded-0" placeholder="quantity (kg)" #quantity>
+                            {{ myInput.focus() }}
+                            <button type="button" class="btn btn-success float-right rounded-0" (click)='buy(quantity,product.key)'>buy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
